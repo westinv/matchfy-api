@@ -16,15 +16,6 @@
 
 module.exports.views = {
 
-  /***************************************************************************
-  *                                                                          *
-  * Extension to use for your views. When calling `res.view()` in an action, *
-  * you can leave this extension off. For example, calling                   *
-  * `res.view('homepage')` will (using default settings) look for a          *
-  * `views/homepage.ejs` file.                                               *
-  *                                                                          *
-  ***************************************************************************/
-
   // extension: 'ejs',
 
   /***************************************************************************

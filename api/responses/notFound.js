@@ -14,8 +14,13 @@ module.exports = function notFound(optionalData) {
     var resposta = {
       response : "not found"
     }
-    return res.status(400).send(resposta);
-  }
+    res.format({ 
+      
+      json : function(){ res.status(400).send(resposta); },
+      html : function(){ res.status(400).end("not found"); }
+      
+    });
+    }
   // Else if the provided data is an Error instance, if it has
   // a toJSON() function, then always run it and use it as the
   // response body to send.  Otherwise, send down its `.stack`,
