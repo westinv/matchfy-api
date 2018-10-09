@@ -10,6 +10,10 @@
 
 module.exports.routes = {
 
-  "GET /v1/health" : "EndpointController.health"
+  "GET /v1/health" : {
+    controller : "EndpointController",
+    action : "health",
+    cors : false
+  }
 
 };
