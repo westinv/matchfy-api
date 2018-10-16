@@ -17,6 +17,9 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
-
+  '*' : false,
+  HealthController : {
+    health : "auth0Authenticated"
+  }
+ 
 };
