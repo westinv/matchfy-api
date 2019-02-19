@@ -1,4 +1,4 @@
 
 var passport = require("passport");
 
-module.exports = passport.authenticate("auth0",{ failureRedirect : "/v1/login" });
+module.exports = passport.authenticate("auth0",{scope : [ "email", "profile"], failureRedirect : "/v1/login" });
