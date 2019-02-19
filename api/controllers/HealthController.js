@@ -7,15 +7,15 @@
 
 module.exports = {
   
-        health : function(req,res){
-           
-            sails.log.info("server health has been required");
-            var resposta = {
-                health : true,
-            }
-            return res.status(200).send(resposta);   
-           
+    health : function(req,res){
+        
+        sails.log.info("server health has been required");
+        var resposta = {
+            health : true,
         }
+        return res.status(200).send(resposta);   
+        
+    }
     
 };
 
