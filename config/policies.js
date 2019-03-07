@@ -1,7 +1,7 @@
 
 module.exports.policies = {
 
-  '*' : true,
+  '*' : "auth0Authenticated",
   
   LoginController : {
     login : true
