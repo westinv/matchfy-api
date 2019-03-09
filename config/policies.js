@@ -11,6 +11,8 @@ module.exports.policies = {
     profile : "psport"
   },
 
-  LogoutController :{ logout : true }
+  LogoutController : { 
+    logout : true 
+  }
  
 };
