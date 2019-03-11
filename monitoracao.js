@@ -7,7 +7,7 @@ var options = {
     hostname: "localhost",
     port: 1337,
     path:"/v1/health",
-    method: "POST",
+    method: "GET",
     headers : {
         "Accept" : "application/json",
         "Authorization" : ""
@@ -51,7 +51,7 @@ function monitoracao(){
         });        
     });
     
-    client.on("error", (error) => { throw "503" });
+    client.on("error", (error) => { console.log("503"); });
 
     client.end();
 }
