@@ -1,5 +1,6 @@
 
 module.exports.policies = {
 
-  '*' : "auth0Authenticated"
+  // '*' : "auth0Authenticated"
+  "*" : true
 };

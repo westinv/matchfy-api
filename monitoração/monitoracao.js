@@ -17,14 +17,14 @@ var Options = {
 var time = 0;
 var monitorar;
 
-function setOptions (token){ //Função que recebe a Token e insere no options
+function setOptions(token){ //Função que recebe a Token e insere no options
     Options.headers.Authorization = "Bearer " + token;
 }
 
 setInterval( async () => { //Função async que irá tratar a monitoração da API 
     
     if( time == 0 ) {
-       await getToken(setOptions);
+        await getToken(setOptions);
         monitorar = setInterval(monitoracao,3000);
     }
 

@@ -1,9 +1,12 @@
 
 function cadastrar(req,res){
 
+    const user = JSON.parse(req.allParams().data); //Converte os dados recebido para um Objeto JS
+    sails.log.info(user);
+
     //Insere os dados recebidos no banco
-    const sql = "insert into usuarios( nome, email, idade, picture ) values('" + req.user.displayName + "','" + 
-    req.user.emails[0].value + "'," + Math.random() * 100 + ",'" + req.user.picture +"');";
+    const sql = "insert into usuarios( nome, email, idade, picture ) values('" + user.name + "','" + 
+    user.email + "'," + Math.random() * 100 + ",'" + user.picture +"');";
     
     sails.getDatastore("banco_dados").sendNativeQuery(sql,(err,resul) => {
         
@@ -19,21 +22,11 @@ function cadastrar(req,res){
 
 module.exports = {
     
-    profile : function(req,res){
+    profile : function(req,res) {
         
         sails.log.info("callback");
-        
-        //Testa se há uma conta associada com o e-mail recebido
-        const sql = "select nome from usuarios where email = " +"'victorelioenay@hotmail.co'" ;
-        sails.getDatastore('banco_dados').sendNativeQuery(sql,(err,resul) => {
-            
-            if( resul.rowCount == 0 ){
-                cadastrar(req,res);//Caso não exista, realiza o cadastro do mesmo no banco
-            }
-            else {
-                res.json({ cadastrar : true });//Caso exista, retorna um json informando sobre a existência de um cadastro
-            }
-        });
+        cadastrar(req,res);//Chama a função de cadastro
+         
     }
 };
 
