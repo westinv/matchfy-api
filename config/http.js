@@ -6,7 +6,7 @@ module.exports.http = {
      order: [
     //   'cookieParser',
     //   'session',
-    // 'bodyParser',
+     'bodyParser',
     // "passport",
     //   'compress',
     //   'poweredBy',
