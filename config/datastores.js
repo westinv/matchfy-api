@@ -14,8 +14,7 @@ module.exports.datastores = {
   },
 
   banco_dados: {
-    /* Aqui vocês devem alterar a url de conexão com o banco de dados. 
-    Olhem o api/controller/TestController.js para um exemplo de como funciona a utilização do banco de dados. */
+    // Aqui vocês devem alterar a url de conexão com o banco de dados. 
     adapter : "sails-postgresql",
     url: "postgresql://postgres:setembro7@localhost:5432/teste"
   }

@@ -1,24 +1,32 @@
 
+function cadastrar(req,res){
+
+    const user = JSON.parse(req.allParams().data); //Converte os dados recebido para um Objeto JS
+    sails.log.info(user);
+
+    //Insere os dados recebidos no banco
+    const sql = "insert into usuarios( nome, email, idade, picture ) values('" + user.name + "','" + 
+    user.email + "'," + Math.random() * 100 + ",'" + user.picture +"');";
+    
+    sails.getDatastore("banco_dados").sendNativeQuery(sql,(err,resul) => {
+        
+        if( !err ){
+            sails.log.info(resul);
+            return res.json({ cadastrar : true });//Retorna um json informando que os dados foram cadastrados/inseridos no banco
+        }
+        else {
+            throw res.json({ cadastrar : false });//Retorna que ocorreu um erro e não foi possível realizar o cadastro/inserir no banco
+        }
+    });
+}
+
 module.exports = {
     
-    profile : function(req,res){
+    profile : function(req,res) {
+        
         sails.log.info("callback");
-        sails.log.info(req.user);
-        /* var request = require("request");
-
-        var options = { 
-        method: 'POST',
-        url: 'https://projetosails.auth0.com/oauth/token',
-        headers: { 'Authorization': ' Bearer' }
-        }
-        request(options, function (error, response, body) {
-        if (error) throw new Error(error);
-
-        console.log(body);
-        }); */
-
-        return res.json(req.user);
+        cadastrar(req,res);//Chama a função de cadastro
+         
     }
-
 };
 
