@@ -23,9 +23,23 @@ function cadastrar(req,res){
 module.exports = {
     
     profile : function(req,res) {
+        const user = JSON.parse(req.body.data);
         
         sails.log.info("callback");
-        cadastrar(req,res);//Chama a função de cadastro
+        const sql = "select email from usuarios where email = " + user.email;
+        sails.getDatastore("banco_dados").sendNativeQuery(sql,(err,result)=>{
+            
+                cadastrar(req,res);//Chama a função de cadastro
+               
+
+        });
+            
+
+            
+
+        
+       
+       
          
     }
 };
