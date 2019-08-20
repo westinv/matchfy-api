@@ -10,10 +10,13 @@ module.exports = function notFound(optionalData) {
 
   // If no data was provided, use res.sendStatus().
   if (optionalData === undefined) {
+
     sails.log.info("not found");
+
     var resposta = {
       response : "not found"
     }
+    
     res.format({ 
       
       json : function(){ res.status(400).send(resposta); },
