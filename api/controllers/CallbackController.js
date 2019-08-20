@@ -1,8 +1,7 @@
 
-function cadastrar(req,res){
+function cadastrar(user,res){
 
-    const user = JSON.parse(req.allParams().data); //Converte os dados recebido para um Objeto JS
-    sails.log.info(user);
+    sails.log.info("Cadastro");
 
     //Insere os dados recebidos no banco
     const sql = "insert into usuarios( nome, email, idade, picture ) values('" + user.name + "','" + 
@@ -10,12 +9,13 @@ function cadastrar(req,res){
     
     sails.getDatastore("banco_dados").sendNativeQuery(sql,(err,resul) => {
         
-        if( !err ){
-            sails.log.info(resul);
-            return res.json({ cadastrar : true });//Retorna um json informando que os dados foram cadastrados/inseridos no banco
+        if( err ){
+            sails.log.info( err );
+            return res.json({ cadastro : false, err : err });//Retorna um json informando que os dados foram cadastrados/inseridos no banco
         }
         else {
-            throw res.json({ cadastrar : false });//Retorna que ocorreu um erro e não foi possível realizar o cadastro/inserir no banco
+            sails.log.info(resul);
+            return res.json({ cadastro : true });//Retorna que ocorreu um erro e não foi possível realizar o cadastro/inserir no banco
         }
     });
 }
@@ -23,24 +23,26 @@ function cadastrar(req,res){
 module.exports = {
     
     profile : function(req,res) {
-        const user = JSON.parse(req.body.data);
+        
+        const user = req.body.data;
         
         sails.log.info("callback");
-        const sql = "select email from usuarios where email = " + user.email;
-        sails.getDatastore("banco_dados").sendNativeQuery(sql,(err,result)=>{
-            
-                cadastrar(req,res);//Chama a função de cadastro
-               
+    
+        const sql = "select email from usuarios where email = '" + user.email + "'";
+        sails.getDatastore("banco_dados").sendNativeQuery(sql,(err,resul)=>{
 
-        });
-            
-
-            
-
-        
-       
-       
-         
+            if( err ) {
+                sails.log.info( err );
+                return res.json({ cadastro : false, err : err });
+            }
+            else {
+                sails.log.info( resul );
+                if( resul.rowCount == 0 )
+                    cadastrar(user,res);
+                else
+                    return res.json({ cadastro : true });
+            }
+        });  
     }
 };
 
